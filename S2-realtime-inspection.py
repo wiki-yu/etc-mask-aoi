@@ -2,10 +2,6 @@ import cv2
 import numpy as np
 import matplotlib.pyplot as plt
 
-def write_log():
-    pass
-
-
 def frame_process(img, counter):
 
     img_hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
@@ -47,9 +43,14 @@ def frame_process(img, counter):
 
 def main():
     cam = cv2.VideoCapture(0)
+    if (cam.isOpened() == False):
+        print("Error opening video file")
+        return False
+
     width = int(cam.get(cv2.CAP_PROP_FRAME_WIDTH))
     height = int(cam.get(cv2.CAP_PROP_FRAME_HEIGHT))
     print("The frame width :{}, the height :{}".format(width, height))
+
     counter = 1
     out = cv2.VideoWriter('./out_test_s2.avi', cv2.VideoWriter_fourcc(*'XVID'), 15, (width, height))
 
